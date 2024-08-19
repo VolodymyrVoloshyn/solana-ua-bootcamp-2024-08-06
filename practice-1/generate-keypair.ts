@@ -34,13 +34,13 @@ console.log(`Started at ${startTime.toString()}`);
 while(true){
     let keyPair2 = Keypair.generate();
 
-    let startStr= keyPair2.publicKey.toBase58().substring(1, 5).toLowerCase();
+    let startStr= keyPair2.publicKey.toBase58().substring(0, 4).toLowerCase();
 
     //console.log(startStr);
 
     if(startStr === vovaStr){
-        console.log("Vova Public key:", keyPair.publicKey.toBase58());
-        console.log("Vova Secret key:", keyPair.secretKey);
+        console.log("Vova Public key:", keyPair2.publicKey.toBase58());
+        console.log("Vova Secret key:", keyPair2.secretKey);
 
         break;
     }

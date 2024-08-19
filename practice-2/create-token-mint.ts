@@ -9,7 +9,7 @@ import {
 } from "@solana/web3.js";
 import { createMint } from "@solana/spl-token";
 
-let privateKey = process.env["SECRET_KEY"];
+let privateKey = process.env["SECRET_KEY_Vova"];
 
 if(privateKey === undefined){
     console.log("Can't get private key");
@@ -36,3 +36,5 @@ const link= getExplorerLink("address", tokenMint.toString(), "devnet");
 console.log(`token mint: ${link}`);
 
 // token mint: https://explorer.solana.com/address/jXVfZCA5f2AwQeUmVEkk3bEUDn3miq6Pb1LZvNusxpi?cluster=devnet
+
+// vova token mint: https://explorer.solana.com/address/7PwkSDUcDU5dyqHDP7CW4RHQXabb4hyzgDbSqKGJ9ooS?cluster=devnet
