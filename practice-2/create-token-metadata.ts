@@ -10,7 +10,7 @@ import {
     sendAndConfirmTransaction, 
     Transaction,
 } from "@solana/web3.js";
-import { createCreateMetadataAccountV3Instruction } from "@metaplex-foundation/mpl-token-metadata";
+import { createCreateMetadataAccountV3Instruction, createUpdateMetadataAccountV2Instruction } from "@metaplex-foundation/mpl-token-metadata";
 
 let privateKey = process.env["SECRET_KEY_Vova"];
 
@@ -71,11 +71,38 @@ const createCreateMetadataAccountInstruction = createCreateMetadataAccountV3Inst
     }
 );
 
-transaction.add(createCreateMetadataAccountInstruction);
+//transaction.add(createCreateMetadataAccountInstruction);
+
+const updatedMetadataData = {
+    name: "Solana UA bootcamp Vova Sol",
+    symbol: "VovaSOL",
+    uri: "https://somewhere.com/vova",
+    sellerFeeBasisPoints: 100,
+    creators: null,
+    collection: null,
+    uses: null
+};
+
+const createUpdateMetadataAccountInstruction= createUpdateMetadataAccountV2Instruction(
+    {
+        metadata: metadataPDA,
+        updateAuthority: user.publicKey
+    },
+    {
+        updateMetadataAccountArgsV2 : {
+            data: metadataData,
+            updateAuthority: user.publicKey,
+            primarySaleHappened: true,
+            isMutable: true
+        }
+    }
+);
+
+transaction.add(createUpdateMetadataAccountInstruction);
 
 await sendAndConfirmTransaction(connection, transaction, [user]);
 
-// const link = getExplorerLink("address", tokenMintAccount.toString(), "devnet");
+const link = getExplorerLink("address", tokenMintAccount.toString(), "devnet");
 
-// console.log(`Look at the token mint: ${link}`);
+console.log(`Look at the token mint: ${link}`);
 

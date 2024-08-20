@@ -66,12 +66,22 @@ const createMetadataAccountInstruction =
   );
 transaction.add(createMetadataAccountInstruction);
 
+// await sendAndConfirmTransaction(
+//     connection,
+//     transaction,
+//     [user]
+//   );
+
 await sendAndConfirmTransaction(
-    connection,
-    transaction,
-    [user]
-  );
-  
+  connection,
+  transaction,
+  [user],
+  {
+    skipPreflight: true,
+    maxRetries: 5
+  }
+);
+
   const tokenMintLink = getExplorerLink(
     "address",
     tokenMintAccount.toString(),
